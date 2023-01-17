@@ -1,0 +1,23 @@
+name: Go Test Pipeline
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  test-go-modules:
+    runs-on: ubuntu-latest
+    container: golang:1.19.5
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Run test in each subdirectory
+        run: |
+          for dir in */; do
+            cd $dir
+            go test -v
+            cd ..
+          done
