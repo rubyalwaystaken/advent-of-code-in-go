@@ -15,10 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run test in each subdirectory
-        run: |
-          echo $PWD
-          ls -a
-          go test -v ./..
+        run: go test -v ./...
 
       - name: Run main file to solve challenge
         run: go run main.go
