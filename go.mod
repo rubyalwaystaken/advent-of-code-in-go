@@ -1,4 +1,4 @@
-module challenge_1
+module adventofcode
 
 go 1.19
 

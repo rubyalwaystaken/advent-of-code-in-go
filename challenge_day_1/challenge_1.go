@@ -1,26 +1,26 @@
-package main
+package day_1
 
 import (
 	"bufio"
 	"log"
+	"sort"
 	"strconv"
 	"strings"
 )
 
-func getTotalCaloriesOfElfCarryingTheMost(calorieList string) (totalCalories float64) {
+func GetTotalCaloriesOfTopElves(calorieList string, numberOfElvesToGet int) []float64 {
 	lineArray, error := convertToStringArray(calorieList)
 
 	if error != nil {
 		log.Fatal(error)
 	}
 
-	caloriesOfCurrentElf := 0.0
+	var caloriesOfCurrentElf float64
+	var totalCalorieList []float64
 
 	for _, line := range lineArray {
 		if line == "\n" || line == "" {
-			if caloriesOfCurrentElf > totalCalories {
-				totalCalories = caloriesOfCurrentElf
-			}
+			totalCalorieList = append(totalCalorieList, caloriesOfCurrentElf)
 			caloriesOfCurrentElf = 0.0
 			continue
 		}
@@ -34,7 +34,9 @@ func getTotalCaloriesOfElfCarryingTheMost(calorieList string) (totalCalories flo
 		caloriesOfCurrentElf += convertedLine
 	}
 
-	return totalCalories
+	sort.Float64s(totalCalorieList)
+
+	return totalCalorieList[len(totalCalorieList)-numberOfElvesToGet:]
 }
 
 func convertToStringArray(calorieList string) (lines []string, err error) {
@@ -51,7 +53,4 @@ func convertToStringArray(calorieList string) (lines []string, err error) {
 
 func convertLineToFloat(line string) (float64, error) {
 	return strconv.ParseFloat(line, 64)
-}
-
-func main() {
 }
