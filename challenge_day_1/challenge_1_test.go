@@ -53,3 +53,28 @@ func Test_GivenCalorieList_WhenGetTotalCaloriesOfTopThreeElves_ThenReturnCorrect
 
 	assert.Equal(t, expectedMaxCalories, givenMaxCalories)
 }
+
+func Test_GivenCalorieList_WhenGetTotalCaloriesOfTopThreeElvesSummed_ThenReturnCorrectValue(t *testing.T) {
+	calorieList :=
+		`1000
+2000
+3000
+
+4000
+
+5000
+6000
+
+7000
+8000
+9000
+
+10000
+
+`
+
+	expectedSummedCalories := 45000.0
+	givenSummedCalories := GetTotalCaloriesOfTopElvesSummed(calorieList, 3)
+
+	assert.Equal(t, expectedSummedCalories, givenSummedCalories)
+}

@@ -8,6 +8,16 @@ import (
 	"strings"
 )
 
+func GetTotalCaloriesOfTopElvesSummed(calorieList string, numberOfElvesToGet int) (summedCalories float64) {
+	caloriesOfTopElves := GetTotalCaloriesOfTopElves(calorieList, numberOfElvesToGet)
+
+	for _, calories := range caloriesOfTopElves {
+		summedCalories += calories
+	}
+
+	return
+}
+
 func GetTotalCaloriesOfTopElves(calorieList string, numberOfElvesToGet int) []float64 {
 	lineArray, error := convertToStringArray(calorieList)
 
