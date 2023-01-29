@@ -1,13 +1,13 @@
 package main
 
 import (
-	day_1 "adventofcode/challenge_day_1"
+	day_2 "adventofcode/challenge_day_2"
 	filereader "adventofcode/myutilities"
 	"fmt"
 )
 
 func main() {
-	input := filereader.ReadFile("files/challenge_1.txt")
-	output := day_1.GetTotalCaloriesOfTopElvesSummed(input, 3)
+	input := filereader.ReadFile("files/challenge_2.txt")
+	output := day_2.CalculateTotalScore(input)
 	fmt.Println(output)
 }
