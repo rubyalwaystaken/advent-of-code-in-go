@@ -9,9 +9,16 @@ import (
 
 var input = filereader.ReadFile("../files/test_challenge_2.txt")
 
-func Test_GivenStrategyGuide_WhenCalculateTotalScore_ThenReturnCorrectResult(t *testing.T) {
+func Test_GivenStrategyGuide_WhenCalculateTotalScoreByFirstStrategy_ThenReturnCorrectResult(t *testing.T) {
 	expected := 15
-	actual := CalculateTotalScore(input)
+	actual := CalculateTotalScoreByFirstStrategy(input)
+
+	assert.Equal(t, expected, actual)
+}
+
+func Test_GivenStrategyGuide_WhenCalculateTotalScoreBySecondStrategy_ThenReturnCorrectResult(t *testing.T) {
+	expected := 12
+	actual := CalculateTotalScoreBySecondStrategy(input)
 
 	assert.Equal(t, expected, actual)
 }

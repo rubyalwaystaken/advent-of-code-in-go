@@ -17,13 +17,19 @@ var drawMap = map[string]string{
 	"C": "Z", // Scissors
 }
 
-var winCombo = map[string]string{
+var winMap = map[string]string{
 	"A": "Y", // Paper beats Rock
 	"B": "Z", // Scissors beat Paper
 	"C": "X", // Rock beats Scissors
 }
 
-func CalculateTotalScore(input []string) (totalScore int) {
+var loseMap = map[string]string{
+	"A": "Z", // Scissors loses to Rock
+	"B": "X", // Rock loses to Paper
+	"C": "Y", // Paper loses to Scissors
+}
+
+func CalculateTotalScoreByFirstStrategy(input []string) (totalScore int) {
 	for _, line := range input {
 		columns := splitByColumn(line)
 
@@ -31,12 +37,37 @@ func CalculateTotalScore(input []string) (totalScore int) {
 
 		if drawMap[columns[0]] == columns[1] {
 			roundScore = 3
-		} else if winCombo[columns[0]] == columns[1] {
+		} else if winMap[columns[0]] == columns[1] {
 			roundScore = 6
 		}
 
 		totalScore += roundScore
 		totalScore += shapeScore[columns[1]]
+	}
+
+	return
+}
+
+func CalculateTotalScoreBySecondStrategy(input []string) (totalScore int) {
+	for _, line := range input {
+		columns := splitByColumn(line)
+
+		var roundScore = 0
+		var shapeToChoose = ""
+
+		switch moveToMake := columns[1]; moveToMake {
+		case "X": // Lose
+			shapeToChoose = loseMap[columns[0]]
+		case "Y": // Draw
+			shapeToChoose = drawMap[columns[0]]
+			roundScore = 3
+		case "Z": // Win
+			shapeToChoose = winMap[columns[0]]
+			roundScore = 6
+		}
+
+		totalScore += roundScore
+		totalScore += shapeScore[shapeToChoose]
 	}
 
 	return
